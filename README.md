@@ -10,3 +10,5 @@ The movies are updated daily. However due to the sheer number of movies, it was 
 
 
 The Alteryx Flow specifically pulled data that was fully populated and filled in with 'reasonable' values. This means that a movie will have a rating score greater than 0 with at least 1 review. Furthermore, the movies with runtimes of at least 30 minutes and less than 7 hours were sampled to remove any extraneous data. 
+
+movie poster/ background path starts with "https://image.tmdb.org/t/p/w1280"
