@@ -28,7 +28,7 @@ svg.append("text")
 // Create clipPath to clip overflow
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
-  .append("rect")
+    .append("rect")
     .attr("width", width)
     .attr("height", height);
 

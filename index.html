@@ -6,12 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>D3.js Narrative Visualization</title>
         <script src="https://d3js.org/d3.v7.min.js"></script>
-    </head>
+        <!-- D3 Annotation Script -->
+        <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>    </head>
     <body>
 
         <div id="movie-vs-year"></div>
-
-        <script src="js/linechart_v2.js"></script>
+        <div id="tooltip" 
+            style="position: absolute; 
+                   opacity: 0; 
+                   background-color: white; 
+                   border: 1px solid black; 
+                   padding: 5px; 
+                   border-radius: 3px; 
+                   pointer-events: none;">
+        </div>
+        <script src="js/linechart_static.js"></script>
 
     </body>
 </html>
