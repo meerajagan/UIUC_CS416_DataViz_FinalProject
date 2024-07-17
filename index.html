@@ -5,12 +5,33 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>D3.js Narrative Visualization</title>
+        <style>
+            .tooltip {
+                position: absolute;
+                text-align: center;
+                width: 500px;
+                height: auto;
+                padding: 5px;
+                font: 12px sans-serif;
+                background: #c8c4ff;
+                opacity: 0.5;
+                border: 0px;
+                border-radius: 8px;
+                pointer-events: none;
+            }
+            .tag {
+                margin-right: 10px;
+                padding: 5px;
+                border-radius: 5px;
+                color: white;
+            }
+        </style>
+        <!-- D3 JS -->
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <!-- D3 Annotation Script -->
         <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>    </head>
     <body>
 
-        <div id="movie-vs-year"></div>
         <div id="tooltip" 
             style="position: absolute; 
                    opacity: 0; 
@@ -20,7 +41,11 @@
                    border-radius: 3px; 
                    pointer-events: none;">
         </div>
-        <script src="js/linechart_static.js"></script>
+
+        <div id="movie-vs-year"></div>
+        <select select id="selectButton"></select>
+        <div id="posters-container"></div>
+        <script src="js/linechart_pickGenre.js"></script>
 
     </body>
 </html>
