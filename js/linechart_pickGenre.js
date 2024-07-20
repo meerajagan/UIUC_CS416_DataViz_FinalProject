@@ -50,9 +50,7 @@ const mini_brush_chart = svg.append("g")
     .attr("transform", `translate(${margin2.left},${margin2.top})`);
 
 // Create a div to show selected tags
-const tagsContainer = d3.select("body")
-    .append("div")
-    .attr("id", "tagsContainer");
+const tagsContainer = d3.select("#tags-container");
 
 const postersContainer = d3.select("#posters-container");
 
@@ -130,6 +128,15 @@ function drawLines(data, movieData) {
             .style("stroke", (d, i) => customColors[genres.indexOf(d.genre)])
             .attr("fill", "none");
 
+        // Update tags
+        tagsContainer.selectAll(".tag").remove();  // Clear previous tags
+        selectedGenres.forEach(genre => {
+            tagsContainer.append("span")
+                .attr("class", "tag")
+                .style("background-color", customColors[genres.indexOf(genre)])
+                .text(genre);
+        });
+
         // Add and set up the brush
         mini_brush_chart.selectAll(".brush").remove();
         const brush = d3.brushX()
@@ -144,7 +151,7 @@ function drawLines(data, movieData) {
         if (brushSelection) {
             brushGroup.call(brush.move, brushSelection);
         } else {
-            brushGroup.call(brush.move, x2.range()); // Corrected to use x2.range()
+            brushGroup.call(brush.move, x2.range());
         }
 
         function brushed(event) {
@@ -164,14 +171,67 @@ function drawLines(data, movieData) {
             }
         }
 
-        // Update tags
-        tagsContainer.html("");  // Clear previous tags
-        selectedGenres.forEach(genre => {
-            tagsContainer.append("span")
-                .attr("class", "tag")
-                .style("background-color", customColors[genres.indexOf(genre)])
-                .text(genre);
-        });
+        // Update tooltip to only show selected genres
+        const tooltip_yearCount = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0)
+            .style("position", "absolute")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px");
+
+        const focus = main_chart.append("g")
+            .attr("class", "focus")
+            .style("display", "none");
+
+        focus.append("line")
+            .attr("class", "x-hover-line hover-line")
+            .attr("y1", 0)
+            .attr("y2", height);
+
+        const overlay = main_chart.append("rect")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .on("mouseover", () => focus.style("display", null))
+            .on("mouseout", () => {
+                focus.style("display", "none");
+                tooltip_yearCount.style("opacity", 0);
+            })
+            .on("mousemove", mousemove);
+
+        function mousemove(event) {
+            const mouseX = d3.pointer(event)[0];
+            const x0 = x.invert(mouseX);
+            const i = d3.bisector(d => d.year).left(data[0].values, x0, 1);
+            const d0 = data[0].values[i - 1];
+            const d1 = data[0].values[i];
+            const dClosest = x0 - d0.year > d1.year - x0 ? d1 : d0;
+
+            focus.attr("transform", `translate(${x(dClosest.year)},0)`);
+            focus.select(".x-hover-line").attr("y2", height);
+
+            let tooltipContent = `<strong>Year: ${dClosest.year.getFullYear()}</strong><br>----<br>`;
+
+            filteredData.sort((a, b) => a.genre.localeCompare(b.genre));
+            
+            filteredData.forEach(d => {
+                const value = d.values.find(v => v.year.getFullYear() === dClosest.year.getFullYear());
+                if (value) {
+                    tooltipContent += `${d.genre}: <i> ${value.count} </i><br>`;
+                }
+            });
+
+            tooltip_yearCount.html(tooltipContent)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 28) + "px")
+                .style("opacity", 0.9);
+        }
+
     }
 
     d3.select("#selectButton").on("change", function () {
@@ -275,4 +335,5 @@ function drawLines(data, movieData) {
 
     // Initialize with no brush selection
     update(data.map(d => d.genre));
+
 }

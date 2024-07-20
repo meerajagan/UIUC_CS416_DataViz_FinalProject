@@ -9,7 +9,7 @@
             .tooltip {
                 position: absolute;
                 text-align: center;
-                width: 500px;
+                width: 150px;
                 height: auto;
                 padding: 5px;
                 font: 12px sans-serif;
@@ -26,6 +26,20 @@
                 color: white;
                 display:flex;
             }
+            .line {
+            fill: none;
+            stroke-width: 1.5px;
+            }
+            .x-hover-line {
+                stroke: #aaa;
+                stroke-width: 1px;
+                stroke-dasharray: 3, 3;
+            }
+            .main-container {
+                display: flex;
+                align-items: flex-start;
+            }
+
         </style>
         <!-- D3 JS -->
         <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -43,9 +57,14 @@
                    pointer-events: none;">
         </div>
 
-        <div id="movie-vs-year"></div>
-        <select select id="selectButton"></select>
-        <div id="slider"></div>
+        <div class="main-container">
+            <div id="movie-vs-year"></div>
+
+            <div class="right-container">
+                <select multiple id="selectButton"></select>
+                <div id="tags-container"></div>
+            </div>
+        </div>
         <div id="posters-container"></div>
         <script src="js/linechart_pickGenre.js"></script>
 
