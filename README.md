@@ -1,6 +1,8 @@
 # UIUC_CS416_DataViz_FinalProject
 Final Project for Course: CS416 at UIUC
 
+## Access the final site here: https://meerajagan.github.io/UIUC_CS416_DataViz_FinalProject/index.html
+
 ## Data Pulls
 Data is sourced from https://www.themoviedb.org/?language=en-US
 Data was pulled into this Kaggle Site: https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies
