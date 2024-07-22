@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>D3.js Narrative Visualization</title>
+        <link rel="stylesheet" href="css/page5_heatmap.css">
+
+        <!-- D3 JS -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <!-- D3 Annotation Script -->
+        <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>    </head>
+    <body>
+
+        <div id="tooltip" 
+            style="position: absolute; 
+                   opacity: 0; 
+                   background-color: white; 
+                   border: 1px solid black; 
+                   padding: 5px; 
+                   border-radius: 3px; 
+                   pointer-events: none;">
+        </div>
+
+        <div>
+            <p>
+                <h1>Movie Genres vs Months </h1>
+
+                <div class="button-container">
+                    <a href="index_page5_chart3.html">Click Here to See Genres Over the Years!!</a>
+                </div>
+
+                <ul>
+                    <li>Here you can explore specific genres and how they vary over months of the year. </li>
+                    <li> <h4>Hover over the chart for tooltips.</li>
+                    <li> Annotations are provided for some observations </li>
+                </ul>
+            </p>
+        </div>
+
+        <div id="genre-vs-month"></div>
+        <script src="js/heatmap_byMonth.js"></script>
+
+    </body>
+</html>

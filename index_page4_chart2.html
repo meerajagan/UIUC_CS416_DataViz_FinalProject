@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>D3.js Narrative Visualization</title>
+        <link rel="stylesheet" href="css/page4.css">
+        <!-- D3 JS -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <!-- D3 Annotation Script -->
+        <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>    </head>
+    <body>
+
+        <div id="tooltip" 
+            style="position: absolute; 
+                   opacity: 0; 
+                   background-color: white; 
+                   border: 1px solid black; 
+                   padding: 5px; 
+                   border-radius: 3px; 
+                   pointer-events: none;">
+        </div>
+
+        <div>
+            <p>
+                <h1>Movie Release vs Years - Interactive </h1>
+
+                <div class="button-container">
+                    <a href="index_page3_chart.html">Go to Previous Page</a>
+                    <a href="index_page5_chart3.html">Go to Next Page</a>
+                </div>
+
+                <ul>
+                    <li>Here you can explore more about the number of movie releases over years</li>
+                    <li><strong>Hover over the chart for tooltips</li>
+                    <li>Use the brush chart under the line chart to brush over years</strong></li>
+                </ul>
+
+            </p>
+        </div>
+ 
+        <div id="movie-vs-year-interactable"></div>
+        <script src="js/linechart_interactable.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>D3.js Narrative Visualization</title>
+        <link rel="stylesheet" href="css/page2.css">
+    </head>
+    <body>
+        <div>
+            <p>
+                <h1>An Overview of the Data </h1>
+
+                <div class="button-container">
+                    <a href="index_page1_start.html">Go to Previous Page</a>
+                    <a href="index_page3_chart.html">Go to Next Page</a>
+                </div>
+
+                <ul>
+                    
+                    <li>The data was sourced from <i>The Movie DataBase (TMDB.org)</i></li>
+                    <li>The data was then pulled with an api call to this kaggle link: https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies</li>
+                    <li>Since the database is extremely large, a sample of it was used. Movies cut off at <i>October 2023</i>. To determine this the following criteria were used: </li>
+                    <li> -- English Movies were considered</li>
+                    <li> -- Only those movies with a rating and at least 1 review were considered</li>
+                    <li> -- Movies with duration longer than 30 mins and less than 7 hours were considered. Somes movies could be represented as a part 1 & 2 in one so that duration was considered.</li>
+                    <li> -- Only movies with the "released" status were considerd.</li>
+                    <li>The Alteryx flow used to clean the data can be found in the Github repo</li>
+                    
+                </ul>
+            </p>
+        </div>
+    </body>
+</html>

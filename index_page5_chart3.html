@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>D3.js Narrative Visualization</title>
+        <link rel="stylesheet" href="css/page5.css">
+        <!-- D3 JS -->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <!-- D3 Annotation Script -->
+        <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>    </head>
+    <body>
+
+        <div id="tooltip" 
+            style="position: absolute; 
+                   opacity: 0; 
+                   background-color: white; 
+                   border: 1px solid black; 
+                   padding: 5px; 
+                   border-radius: 3px; 
+                   pointer-events: none;">
+        </div>
+
+        <div>
+            <p>
+                <h2>Movie Genres vs Years </h2>
+                <h2>(may take a couple seconds to load due to images and size of database)</h2>
+                
+                <div class="button-container">
+                    <a href="index_page4_chart2.html">Go to Previous Page</a>
+                    <a href="index_page5_heatmap.html">Click Here to See How Generes Vary by Month!</a>
+                </div>
+
+                <ul>
+                    <li>Here you can explore specific genres and how they vary over time. The multiline chart can be controlled with the select menu to the right. </li>
+                    <li><h4>Hold "Ctrl" to select multiple options.</h4></li>
+                    <li>Tags for selected genres are listed under the select menu and colors correspond to the colors on the multiline chart.</li>
+                    <li> <h4>Hover over the chart for tooltips.</li>
+                    <li><h4>Use the brush chart under the multiline chart to brush for years. This will also change the movie posters</h4></li>
+                    <li>Below the multiline chart are posters for movies released for selected genres over brushed years.</li>
+                    <li><h4>Hover over movie posters for descriptions and further movie information.</h4></li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="linechart-maincontainer">
+            <div class="main-container">
+                <div id="movie-vs-year-genreInteractive"></div>
+    
+                <div class="right-container">
+                    <select multiple id="selectButton"></select>
+                    <div id="tags-container"></div>
+                </div>
+            </div>
+            <div id="posters-container"></div>
+        </div>
+        
+
+        <script src="js/linechart_pickGenre.js"></script>
+
+    </body>
+</html>
