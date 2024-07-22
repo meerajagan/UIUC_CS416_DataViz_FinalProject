@@ -13,3 +13,10 @@ The movies are updated daily. However due to the sheer number of movies, it was 
 
 
 The Alteryx Flow specifically pulled data that was fully populated and filled in with 'reasonable' values. This means that a movie will have a rating score greater than 0 with at least 1 review. Furthermore, the movies with runtimes of at least 30 minutes and less than 7 hours were sampled to remove any extraneous data. 
+
+## Files In Repo
+* <b> cleaning_flow -> Alteryx Flow used to clean data
+* cleaned dataset (TMDB_clean.csv) can be found in the 'js' folder! </b>
+* .html files used to host scripts
+* 'js' folder to hold all javascript files and the dataset
+* 'css' folder to hold all css files used
