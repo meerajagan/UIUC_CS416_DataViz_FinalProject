@@ -1,13 +1,34 @@
+// Set Margins and explicit definition for genre and colors
 const margin = { top: 10, right: 10, bottom: 100, left: 40 };
 const margin2 = { top: 430, right: 10, bottom: 20, left: 40 };
-const width = 960 - margin.left - margin.right;
+const width = 1000 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 const height2 = 480 - margin2.top - margin2.bottom;
 
 const genres = ["Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama", "Family", "Fantasy", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction", "Thriller", "TV Movie", "War", "Western"];
-const customColors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#aec7e8", "#ffbb78", "#98df8a", "#ff9896", "#c5b0d5", "#c49c94", "#f7b6d2", "#c7c7c7", "#dbdb8d", "#9edae5"];
-
-// Populate dropdown menu
+const customColors = [
+    "#FF5733", // Vivid Red-Orange
+    "#FF6F61", // Coral
+    "#FF8C00", // Dark Orange
+    "#FFA07A", // Light Salmon
+    "#FF1493", // Deep Pink
+    "#FF69B4", // Hot Pink
+    "#FF00FF", // Magenta
+    "#8A2BE2", // Blue Violet
+    "#4B0082", // Indigo
+    "#6A5ACD", // Slate Blue
+    "#483D8B", // Dark Slate Blue
+    "#32CD32", // Lime Green
+    "#3CB371", // Medium Sea Green
+    "#00CED1", // Dark Turquoise
+    "#40E0D0", // Turquoise
+    "#20B2AA", // Light Sea Green
+    "#1E90FF", // Dodger Blue
+    "#4682B4", // Steel Blue
+    "#D2691E", // Chocolate
+    "#8B4513"  // Saddle Brown
+];
+// Select Genre Menu
 const selectButton = d3.select("#selectButton");
 genres.forEach(genre => {
     selectButton.append("option")
@@ -15,13 +36,13 @@ genres.forEach(genre => {
         .text(genre);
 });
 
-// Set up the x and y scales
+// Scales
 const x = d3.scaleTime().range([0, width]);
 const x2 = d3.scaleTime().range([0, width]);
 const y = d3.scaleLinear().range([height, 0]);
 const y2 = d3.scaleLinear().range([height2, 0]);
 
-const svg = d3.select("#movie-vs-year")
+const svg = d3.select("#movie-vs-year-genreInteractive")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
@@ -34,7 +55,7 @@ svg.append("text")
     .style("font-weight", "bold")
     .text("Number of Movies Released Over Time");
 
-// Create clipPath to clip overflow
+// Clip overflow - D3: Context and Focus
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
     .append("rect")
@@ -49,15 +70,14 @@ const mini_brush_chart = svg.append("g")
     .attr("class", "mini_brush_chart")
     .attr("transform", `translate(${margin2.left},${margin2.top})`);
 
-// Create a div to show selected tags
+// need tags for select menu and want posters
 const tagsContainer = d3.select("#tags-container");
-
 const postersContainer = d3.select("#posters-container");
 
 d3.csv("js/TMDB_cleaned.csv", function (d) {
     d.release_date = d3.timeParse("%Y-%m-%d")(d.release_date);
     return {
-        release_year: d3.timeFormat("%Y")(d.release_date),
+        release_year: d3.timeFormat("%Y")(d.release_date), //this time just year
         genres: d.genres.split(", "),
         title: d.title,
         poster_path: d.poster_path,
@@ -70,6 +90,8 @@ d3.csv("js/TMDB_cleaned.csv", function (d) {
         tagline: d.tagline
     };
 }).then(function (data) {
+
+    // Aggregate Data 
     let genreYearCount = {};
 
     data.forEach(d => {
@@ -92,12 +114,16 @@ d3.csv("js/TMDB_cleaned.csv", function (d) {
     drawLines(dataArray, data);
 });
 
+// Multiline Chart for each selected genre
 function drawLines(data, movieData) {
+
+    // Domains
     x.domain(d3.extent(data[0].values, d => d.year));
     y.domain([0, d3.max(data, d => d3.max(d.values, v => v.count))]);
     x2.domain(x.domain());
     y2.domain(y.domain());
 
+    // Axes
     main_chart.append("g")
         .attr("class", "x axis")
         .attr("transform", `translate(0,${height})`)
@@ -112,11 +138,12 @@ function drawLines(data, movieData) {
         .attr("transform", `translate(0,${height2})`)
         .call(d3.axisBottom(x2));
 
+    // Update only with selected Genres and brush selection -- gpt 3.5 for debugging
     function update(selectedGenres, brushSelection) {
         const filteredData = data.filter(d => selectedGenres.includes(d.genre));
 
+        // Remove old lines and redraw
         main_chart.selectAll(".line").remove();
-
         main_chart.selectAll(".line")
             .data(filteredData)
             .enter().append("path")
@@ -128,8 +155,8 @@ function drawLines(data, movieData) {
             .style("stroke", (d, i) => customColors[genres.indexOf(d.genre)])
             .attr("fill", "none");
 
-        // Update tags
-        tagsContainer.selectAll(".tag").remove();  // Clear previous tags
+        // Clear and Update tags
+        tagsContainer.selectAll(".tag").remove();
         selectedGenres.forEach(genre => {
             tagsContainer.append("span")
                 .attr("class", "tag")
@@ -137,7 +164,7 @@ function drawLines(data, movieData) {
                 .text(genre);
         });
 
-        // Add and set up the brush
+        // Brush like previous but without lines for cleanliness
         mini_brush_chart.selectAll(".brush").remove();
         const brush = d3.brushX()
             .extent([[0, 0], [width, height2]])
@@ -147,13 +174,13 @@ function drawLines(data, movieData) {
             .attr("class", "brush")
             .call(brush);
 
-        // Set the initial brush selection
         if (brushSelection) {
             brushGroup.call(brush.move, brushSelection);
         } else {
             brushGroup.call(brush.move, x2.range());
         }
 
+        // Separate Brush Function -- D3: FOcus and Context
         function brushed(event) {
             const { selection } = event;
             if (selection) {
@@ -166,12 +193,12 @@ function drawLines(data, movieData) {
                         (d.values));
                 main_chart.select(".x.axis").call(d3.axisBottom(x));
 
-                // Update posters based on brush selection
+                // Update Posters
                 updatePosters(selectedGenres, selection);
             }
         }
 
-        // Update tooltip to only show selected genres
+        // Tooltip for line chart
         const tooltip_yearCount = d3.select("body").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0)
@@ -191,6 +218,7 @@ function drawLines(data, movieData) {
             .attr("y1", 0)
             .attr("y2", height);
 
+        // help from GPT 3.5 and Stackoverflow to get tooltip to correctly overlay over line garph
         const overlay = main_chart.append("rect")
             .attr("class", "overlay")
             .attr("width", width)
@@ -204,6 +232,7 @@ function drawLines(data, movieData) {
             })
             .on("mousemove", mousemove);
 
+        // Tooltip with all selected genre with similar bisect from before
         function mousemove(event) {
             const mouseX = d3.pointer(event)[0];
             const x0 = x.invert(mouseX);
@@ -217,8 +246,8 @@ function drawLines(data, movieData) {
 
             let tooltipContent = `<strong>Year: ${dClosest.year.getFullYear()}</strong><br>----<br>`;
 
+            //sort alpha w all relevant genre
             filteredData.sort((a, b) => a.genre.localeCompare(b.genre));
-            
             filteredData.forEach(d => {
                 const value = d.values.find(v => v.year.getFullYear() === dClosest.year.getFullYear());
                 if (value) {
@@ -226,6 +255,7 @@ function drawLines(data, movieData) {
                 }
             });
 
+            // to get tooltip near pointer
             tooltip_yearCount.html(tooltipContent)
                 .style("left", (event.pageX + 15) + "px")
                 .style("top", (event.pageY - 28) + "px")
@@ -234,12 +264,13 @@ function drawLines(data, movieData) {
 
     }
 
+    // genre select -- Stackoverflow
     d3.select("#selectButton").on("change", function () {
         const selectedGenres = Array.from(this.selectedOptions).map(option => option.value);
         update(selectedGenres);
     });
 
-    // Append tooltip div
+    // Tooltip for Posters -- help from Youtube Vid
     const tooltip = d3.select("body")
         .append("div")
         .attr("class", "tooltip")
@@ -265,6 +296,7 @@ function drawLines(data, movieData) {
         .style("padding-left", "10px")
         .style("color", "white");
 
+    // tooltip formatting - Youtube Video help for styling (lines 279-287)
     const tooltipStyle = 
     `.tooltip-image {
         position: relative;
@@ -274,28 +306,33 @@ function drawLines(data, movieData) {
     styleSheet.innerText = tooltipStyle;
     document.head.appendChild(styleSheet);
 
+    // Posters update -- dynamic change to year and genre.
     function updatePosters(selectedGenres, brushSelection) {
-        postersContainer.html("");  // Clear previous posters
+        //Clear and repopulate posters -- Stackoverflow to help define const topMovies
+        postersContainer.html("");
         selectedGenres.forEach(genre => {
             const topMovies = movieData.filter(d => d.genres.includes(genre) &&
                 (!brushSelection || (d3.timeParse("%Y")(d.release_year) >= x.domain()[0] && d3.timeParse("%Y")(d.release_year) <= x.domain()[1])))
                 .sort((a, b) => (b.vote_average - a.vote_average) && (b.vote_count - a.vote_count))
-                .slice(0, 5);
+                .slice(0, 7);
 
             postersContainer.append("h3")
                 .text(`Top ${genre} Movies`);
 
+            // Flexbox -> displays images horizontally
             const genreContainer = postersContainer.append("div")
                 .attr("class", "genre-container")
-                .style("display", "flex")  // Use flexbox for horizontal layout
+                .style("display", "flex")
                 .style("flex-wrap", "wrap");
 
+            // images pulled from web images from source (TMDB.org)
             topMovies.forEach(movie => {
                 const posterUrl = `https://image.tmdb.org/t/p/w1280${movie.poster_path}`;
                 const backdropUrl = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
                 const posterDiv = genreContainer.append("div")
                     .attr("class", "poster");
 
+                // Tooltip with mouseover and mouseout events
                 posterDiv.append("img")
                     .attr("src", posterUrl)
                     .attr("alt", movie.title)
@@ -333,7 +370,7 @@ function drawLines(data, movieData) {
         });
     }
 
-    // Initialize with no brush selection
+    // Initialize with all genre
     update(data.map(d => d.genre));
 
 }

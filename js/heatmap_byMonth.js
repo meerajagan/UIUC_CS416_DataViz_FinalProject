@@ -1,10 +1,10 @@
 // Set dimensions and margins for the chart
-const margin = { top: 70, right: 120, bottom: 70, left: 120 };
+const margin = { top: 70, right: 120, bottom: 120, left: 120 };
 const width = 1200 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
 // Create the SVG element and append it to the chart container
-const svg = d3.select("#genre-vs-year")
+const svg = d3.select("#genre-vs-month")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -174,6 +174,28 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
       x: x("October") + x.bandwidth() / 2,
       y: height + 15,
       dx: 20,
+      dy: 20,
+      connector: { end: "arrow" }
+    },
+    {
+      note: {
+        label: "Extra Drama Releases in Spring",
+        title: "High Releases"
+      },
+      x: x("March") + x.bandwidth() / 2,
+      y: height + 15,
+      dx: 20,
+      dy: 20,
+      connector: { end: "arrow" }
+    },
+    {
+      note: {
+        label: "Many movies released in September",
+        title: "High Releases"
+      },
+      x: x("September") + x.bandwidth() / 2,
+      y: height + 15,
+      dx: -20,
       dy: 20,
       connector: { end: "arrow" }
     },

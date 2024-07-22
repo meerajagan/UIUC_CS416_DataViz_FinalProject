@@ -21,11 +21,10 @@ svg.append("text")
     .style("font-weight", "bold")
     .text("Number of Movies Released Over Time");
 
-// Append group elements for main and mini charts
+// Append group elements for chart
 const main_chart = svg.append("g")
     .attr("class", "main_chart")
     .attr("transform", `translate(${margin.left},${margin.top})`);
-
 
 // Load the dataset
 d3.csv("js/TMDB_cleaned.csv", function(d) {
@@ -35,7 +34,7 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
         release_date: d.release_date,
     };
 }).then(function(data) {
-    // Aggregate data by year and month
+    // Aggregate data by year and month -- StackOverFlow Help
     const dataByYearMonth = d3.rollups(
         data,
         v => v.length,
@@ -46,27 +45,18 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
         return { date: new Date(year, month - 1), count: count };
     });
 
-    // Sort data by date
+    // Sort
     dataByYearMonth.sort((a, b) => a.date - b.date);
 
-    // Define the x and y domains
+    // Domains
     x.domain(d3.extent(dataByYearMonth, d => d.date));
     y.domain([0, d3.max(dataByYearMonth, d => d.count)]);
 
-    // Create the line generator for both main and mini charts
+    // Lines and append to chart
     const line = d3.line()
       .x(d => x(d.date))
       .y(d => y(d.count));
 
-    main_chart.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Number of Movies Released");
-
-    // Add the line path to the main chart
     main_chart.append("path")
       .datum(dataByYearMonth)
       .attr("class", "line")
@@ -75,13 +65,28 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
       .attr("stroke-width", 1)
       .attr("d", line);
 
-    // Add the x-axis to the main chart
+    // Y Label
+    main_chart.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Number of Movies Released");
+
+    // X Label
+    main_chart.append("text")
+    .attr("transform", "translate(" + (width / 2) + "," + (height + margin.bottom- 60) + ")")
+    .style("text-anchor", "middle")
+    .text("Year");
+
+    // Add the x-axis
     main_chart.append("g")
       .attr("class", "x axis")
       .attr("transform", `translate(0,${height})`)
       .call(d3.axisBottom(x));
 
-    // Add the y-axis to the main chart
+    // Add the y-axis
     main_chart.append("g")
       .attr("class", "y axis")
       .call(d3.axisLeft(y));
@@ -140,11 +145,11 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
     }
     ];
 
-    // Create the annotation type
+    // Create Annotation
     const makeAnnotations = d3.annotation()
         .annotations(annotations);
 
-    // Add annotations to the chart
+    // Add to Chart
     main_chart.append("g")
         .attr("class", "annotation-group")
         .call(makeAnnotations);

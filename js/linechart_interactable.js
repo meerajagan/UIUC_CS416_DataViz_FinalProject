@@ -1,18 +1,18 @@
-// Set dimensions and margins for the main chart and the mini chart
+// Set dimensions and margins for both chart
 const margin = { top: 10, right: 10, bottom: 100, left: 40 };
 const margin2 = { top: 430, right: 10, bottom: 20, left: 40 };
-const width = 960 - margin.left - margin.right;
+const width = 1350 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 const height2 = 500 - margin2.top - margin2.bottom;
 
-// Set up the x and y scales
+// Scales
 const x = d3.scaleTime().range([0, width]);
 const x2 = d3.scaleTime().range([0, width]);
 const y = d3.scaleLinear().range([height, 0]);
 const y2 = d3.scaleLinear().range([height2, 0]);
 
-// Create the SVG element and append it to the chart container
-const svg = d3.select("#movie-vs-year")
+// Create the SVG element with Title
+const svg = d3.select("#movie-vs-year-interactable")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
@@ -25,14 +25,14 @@ svg.append("text")
     .style("font-weight", "bold")
     .text("Number of Movies Released Over Time");
 
-// Create clipPath to clip overflow
+// Clip overflow - D3: Context and Focus
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
     .append("rect")
     .attr("width", width)
     .attr("height", height);
 
-// Append group elements for main and mini charts
+// Append group elements
 const main_chart = svg.append("g")
     .attr("class", "main_chart")
     .attr("transform", `translate(${margin.left},${margin.top})`);
@@ -40,7 +40,6 @@ const main_chart = svg.append("g")
 const mini_brush_chart = svg.append("g")
     .attr("class", "mini_brush_chart")
     .attr("transform", `translate(${margin2.left},${margin2.top})`);
-
 
 // Load the dataset
 d3.csv("js/TMDB_cleaned.csv", function(d) {
@@ -50,7 +49,7 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
         release_date: d.release_date,
     };
 }).then(function(data) {
-    // Aggregate data by year and month
+    // Aggregate data - StackOverFlow Help 
     const dataByYearMonth = d3.rollups(
         data,
         v => v.length,
@@ -61,16 +60,16 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
         return { date: new Date(year, month - 1), count: count };
     });
 
-    // Sort data by date
+    // Sort
     dataByYearMonth.sort((a, b) => a.date - b.date);
 
-    // Define the x and y domains
+    // Domains
     x.domain(d3.extent(dataByYearMonth, d => d.date));
     y.domain([0, d3.max(dataByYearMonth, d => d.count)]);
     x2.domain(x.domain());
     y2.domain(y.domain());
 
-    // Create the line generator for both main and mini charts
+    // Lines
     const line = d3.line()
       .x(d => x(d.date))
       .y(d => y(d.count));
@@ -78,7 +77,8 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
     const line2 = d3.line()
       .x(d => x2(d.date))
       .y(d => y2(d.count));
-
+      
+    // Y Label
     main_chart.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left)
@@ -120,7 +120,7 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
       .attr("transform", `translate(0,${height2})`)
       .call(d3.axisBottom(x2));
 
-    // Add the brush
+    // Brush: See D3 Focus and Context on Observable
     const brush = d3.brushX()
       .extent([[0, 0], [width, height2]])
       .on("brush end", brushed);
@@ -139,7 +139,10 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
       }
     }
 
-    // Tooltip and crosshair elements
+    // Tooltip and crosshair elements -- Youtube Video
+    // Crosshair = tooltiplineX + tooltiplineY
+    // With a circle for spot
+    // Mouseover/mouseout with bisect listening rect
     const tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0)
@@ -201,7 +204,7 @@ d3.csv("js/TMDB_cleaned.csv", function(d) {
           .attr("x1", 0)
           .attr("x2", width);
 
-        tooltip.transition().duration(200).style("opacity", .9);
+        tooltip.transition().duration(100).style("opacity", .9);
         tooltip.html(`Date: ${d3.timeFormat("%B %Y")(d.date)}<br>Count: ${d.count}`)
           .style("left", `${xPos + margin.left}px`)
           .style("top", `${yPos + margin.top}px`);
