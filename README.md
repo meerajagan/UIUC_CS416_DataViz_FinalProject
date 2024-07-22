@@ -1,7 +1,8 @@
 # UIUC_CS416_DataViz_FinalProject
 Final Project for Course: CS416 at UIUC
 
-## Access the final site here: https://meerajagan.github.io/UIUC_CS416_DataViz_FinalProject/index.html
+## Access the final site here:
+<b> https://meerajagan.github.io/UIUC_CS416_DataViz_FinalProject/index.html </b>
 
 ## Data Pulls
 Data is sourced from https://www.themoviedb.org/?language=en-US
