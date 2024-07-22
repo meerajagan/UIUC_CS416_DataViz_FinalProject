@@ -1,0 +1,315 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2024.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>15000000</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>TMDB_movie_dataset_v11.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="id" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="title" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="vote_average" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="vote_count" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="status" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="release_date" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="revenue" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="runtime" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="adult" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="backdrop_path" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="budget" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="homepage" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="imdb_id" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="original_language" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="original_title" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="overview" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="popularity" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="poster_path" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="tagline" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="genres" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="production_companies" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="production_countries" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="spoken_languages" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+            <Field name="keywords" size="15000000" source="File: C:\UIUC\GRAD\CS 416 - Data Visualization\final project\TMDB_movie_dataset_v11.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="810" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\MEERA_~1\AppData\Local\Temp\Alteryx\Engine_1376_534b3af72f5a7f49af824736f2bf9de3_\Engine_1376_6f07e06c3c997541b44a9f74b7d951c8~.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="582" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="status" selected="False" />
+            <SelectField field="revenue" selected="False" />
+            <SelectField field="adult" selected="False" />
+            <SelectField field="budget" selected="False" />
+            <SelectField field="homepage" selected="False" />
+            <SelectField field="imdb_id" selected="False" />
+            <SelectField field="original_language" selected="False" />
+            <SelectField field="original_title" selected="False" />
+            <SelectField field="overview" selected="True" type="V_WString" size="2147483647" />
+            <SelectField field="popularity" selected="False" />
+            <SelectField field="spoken_languages" selected="False" />
+            <SelectField field="release_date1" selected="False" rename="release_year" type="Float" size="4" />
+            <SelectField field="release_date2" selected="False" rename="release_month" type="Float" size="4" />
+            <SelectField field="release_date3" selected="False" rename="release_day" type="Float" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="234" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression><![CDATA[[status] = "Released"
+AND
+[vote_average] > 0.0
+AND
+[vote_count] > 1
+AND 
+([runtime] > 30 AND [runtime] < 420)
+
+]]></Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[status] = "Released"
+AND
+[vote_average] &gt; 0.0
+AND
+[vote_count] &gt; 1
+AND 
+([runti...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="162" y="66" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="vote_average" selected="True" type="Float" size="4" />
+            <SelectField field="vote_count" selected="True" type="Float" size="4" />
+            <SelectField field="runtime" selected="True" type="Float" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="342" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>!IsEmpty([release_date])
+AND
+!IsEmpty([backdrop_path])
+AND
+!IsEmpty([poster_path])
+AND
+!IsEmpty([tagline])
+AND
+!IsEmpty([genres])
+AND
+!IsEmpty([production_companies])
+AND
+!IsEmpty([production_countries])
+AND
+!IsEmpty([keywords])
+AND
+!IsEmpty([overview])</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>!IsEmpty([release_date])
+AND
+!IsEmpty([backdrop_path])
+AND
+!IsEmpty([poster_path...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="714" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\UIUC\GRAD\CS 416 - Data Visualization\final project\movies_cleaned.csv</File>
+          <Passwords />
+          <Disable>False</Disable>
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>True</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>1253</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>movies_cleaned.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="True" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="True" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>cleaning_flow</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="666f4c49-85a8-4f0a-a51e-b2060e0eca31" />
+      <Telemetry>
+        <PreviousWorkflowId value="f1a5a165-a4d0-4e4a-ba1b-7cd20292ab61" />
+        <OriginWorkflowId value="f1a5a165-a4d0-4e4a-ba1b-7cd20292ab61" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
